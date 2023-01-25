@@ -1,6 +1,8 @@
 package com.management.employee.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +13,8 @@ import java.util.Date;
 @Table(name="employee")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Employee {
 
     @Id

@@ -1,14 +1,15 @@
 package com.management.employee.payloads;
 
-import jakarta.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EmployeeDto {
 
     private Integer empId;
@@ -17,7 +18,7 @@ public class EmployeeDto {
 
     private String lastName;
 
-    private Date dob;
+    private String dob;
 
     private String email;
 
