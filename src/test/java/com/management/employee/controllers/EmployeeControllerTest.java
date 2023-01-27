@@ -31,28 +31,18 @@ public class EmployeeControllerTest {
     @MockBean
     private EmployeeService employeeService;
 
-    private EmployeeDto employeeDto;
-
     @BeforeEach
     public void setUp() throws Exception{
-       employeeDto = EmployeeDto.builder()
-                    .empId(4)
-                    .firstName("Pritesh")
-                    .lastName("Singh")
-                    .dob("2023-01-24")
-                    .email("pritesh@gmail.com")
-                    .gender("Male")
-                    .build();
 
-        EmployeeDto emp1 = new EmployeeDto(1,"pritesh","singh","2023-01-23","pritesh@gmail.com","Male");
-        EmployeeDto emp2 = new EmployeeDto(1,"sonam","singh","2024-01-23","sonam@gmail.com","Female");
-        EmployeeDto emp3 = new EmployeeDto(1,"jenny","singh","2024-01-23","sonam@gmail.com","Female");
+        EmployeeDto emp1 = new EmployeeDto(4,"pritesh","singh","2023-01-23","pritesh@gmail.com","Male");
+        EmployeeDto emp2 = new EmployeeDto(3,"sonam","singh","2024-01-23","sonam@gmail.com","Female");
+        EmployeeDto emp3 = new EmployeeDto(2,"jenny","singh","2024-01-23","sonam@gmail.com","Female");
 
         List<EmployeeDto> employeeList = new ArrayList<>(Arrays.asList(emp1,emp2,emp3));
 
         Mockito.when(employeeService.getAllEmployee()).thenReturn((employeeList));
 
-        Mockito.when(employeeService.getEmployeeById(4)).thenReturn(employeeDto);
+        Mockito.when(employeeService.getEmployeeById(4)).thenReturn(emp1);
     }
 
     @Test
@@ -61,7 +51,7 @@ public class EmployeeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/api/v1/employee/")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(2)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(3)));
 
     }
 
@@ -90,7 +80,7 @@ public class EmployeeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/employee/4")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName")
-                .value(employeeDto.getFirstName()));
+                .value("pritesh"));
     }
 
 }
