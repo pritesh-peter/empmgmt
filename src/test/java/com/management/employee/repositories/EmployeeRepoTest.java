@@ -1,5 +1,4 @@
 package com.management.employee.repositories;
-
 import com.management.employee.entities.Employee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,7 @@ class EmployeeRepoTest {
     @BeforeEach
     void setUp(){
         Employee employee = Employee.builder()
-                .empId(1)
+                .empId(5)
                 .firstName("Pritesh")
                 .lastName("Singh")
                 .dob(null)
@@ -34,9 +33,13 @@ class EmployeeRepoTest {
 
     @Test
     public void whenFindById_thenReturnEmployee(){
-        Employee employee1 = employeeRepo.findById(1).get();
-        System.out.println("output heram hai  "+employee1);
-        assertEquals (employee1.getEmail(),"pritesh@gmail.com");
+        Employee employee1 = employeeRepo.findById(4).get();
+        assertEquals(employee1.getEmail(),"jenny@gmail.com");
     }
 
+    @Test
+    public void whenFindall_thenReturnAllEmployees(){
+        List<Employee> employeeList = employeeRepo.findAll();
+        assertEquals(employeeList.size(),4);
+    }
 }
